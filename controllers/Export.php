@@ -13,7 +13,7 @@ class Export extends FHC_Controller
 	 */
 	public function index()
 	{
-		$this->load->view('extensions/dsms/ExportIndex');
+		$this->load->view('extensions/FHC-Core-DSMS/ExportIndex');
 	}
 
 	/**
@@ -23,7 +23,7 @@ class Export extends FHC_Controller
 	public function export()
 	{
 		$person_id = $this->input->get('person_id');
-		$this->load->library('extensions/dsms/ExportLib');
+		$this->load->library('extensions/FHC-Core-DSMS/ExportLib');
 		$this->exportlib->export($person_id);
 	}
 

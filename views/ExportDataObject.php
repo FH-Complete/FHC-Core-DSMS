@@ -12,17 +12,22 @@ foreach ($dataset as $element)
 			if ($cnt>3)
 			{
 				// if there are more than 3 entries - make a table
-				$this->load->view('extensions/dsms/ExportDataTable',
+				$this->load->view('extensions/FHC-Core-DSMS/ExportDataTable',
 					array('result' => $result, 'category' => $element['category']));
 			}
 			else
 			{
 				// else print it as a List
-				$this->load->view('extensions/dsms/ExportDataList',
+				$this->load->view('extensions/FHC-Core-DSMS/ExportDataList',
 					array('result' => $result, 'category' => $element['category']));
 			}
 			echo '<br><br>';
 		}
+	}
+	else
+	{
+		echo "Missing";
+		var_dump($element);
 	}
 }
 ?>

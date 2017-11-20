@@ -10,12 +10,12 @@ SELECT
 	hauptberuflich "Hauptberuflich Lehrend",
 	inkludierte_lehre,
 	vertragsstunden,
-	verwendung_code,
+	(SELECT verwendungbez FROM bis.tbl_verwendung WHERE verwendung_code=tbl_bisverwendung.verwendung_code) as "Verwendung",
 	dv_art,
 	(
 	SELECT
 		array_agg(
-			(SELECT kurzbzlang FROM public.tbl_studiengang WHERE studiengang_kz=tbl_bisfunktion.studiengang_kz) 
+			(SELECT kurzbzlang FROM public.tbl_studiengang WHERE studiengang_kz=tbl_bisfunktion.studiengang_kz)
 			|| ':' ||
 			tbl_bisfunktion.sws )
 	FROM

@@ -15,3 +15,4 @@ FROM
 	LEFT JOIN public.tbl_studiengang USING(studiengang_kz)
 WHERE
 	person_id=$person_id
+ORDER BY buchungsdatum

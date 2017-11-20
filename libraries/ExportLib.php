@@ -4,7 +4,7 @@ if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 class ExportLib
 {
-	const SQL_EXPORT_DIRECTORY = FHCPATH.'application/extensions/dsms/export/sql';
+	const SQL_EXPORT_DIRECTORY = FHCPATH.'application/extensions/FHC-Core-DSMS/export/sql';
 
 	public function __construct()
 	{
@@ -111,7 +111,7 @@ class ExportLib
 				}
 			}
 
-			$this->ci->load->view('extensions/dsms/ExportData',array('dataset' => $dataset));
+			$this->ci->load->view('extensions/FHC-Core-DSMS/ExportData',array('dataset' => $dataset));
 		}
 		else
 		{
@@ -143,7 +143,7 @@ class ExportLib
 					$sql = str_replace('$'.$key, $this->ci->db->escape($value), $sql);
 
 				// parse Category
-				preg_match('/-- Category: (?P<name>[\w ]*)/', $sql, $category);
+				preg_match('/-- Category: (?P<name>[\w ÄÖÜäöü]*)/', $sql, $category);
 
 				if (isset($category['name']))
 					$cat = $category['name'];
