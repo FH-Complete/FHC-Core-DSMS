@@ -1,0 +1,8 @@
+{
+	"name": "dsms",
+	"description": "Datenschutz Manamgement System",
+	"version": "1",
+	"licence": "GPL",
+	"url": "https://github.com/FH-Complete/FHC-Core-DSMS",
+	"core_version": "3.3",
+}

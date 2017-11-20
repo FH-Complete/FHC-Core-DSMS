@@ -1,0 +1,19 @@
+-- Category: Mitarbeiter
+SELECT
+	anmerkung,
+	ausbildungcode,
+	bismelden,
+	fixangestellt,
+	kleriker,
+	kurzbz,
+	lektor,
+	mitarbeiter_uid,
+	ort_kurzbz,
+	personalnummer,
+	standort_id,
+	stundensatz,
+	telefonklappe
+FROM
+	public.tbl_mitarbeiter
+WHERE
+	mitarbeiter_uid=$uid

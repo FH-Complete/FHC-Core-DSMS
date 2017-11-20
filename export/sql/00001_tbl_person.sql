@@ -1,0 +1,33 @@
+-- Category: Person
+SELECT 
+	nachname,
+	vorname,
+	vornamen,
+	anrede,
+	titelpre,
+	titelpost,
+	geschlecht,
+	svnr,
+	ersatzkennzeichen,
+	matr_nr,
+	aktiv,
+	anmerkung,
+	anzahlkinder,
+	bundesland_code,
+	familienstand,
+	foto_sperre,
+	gebdatum,
+	gebort,
+	geburtsnation,
+	gebzeit,
+	homepage,
+	person_id,
+	sprache,
+	staatsbuergerschaft,
+	udf_values,
+	zugangscode,
+	zugangscode_timestamp
+FROM 
+	public.tbl_person 
+WHERE 
+	person_id=$person_id
