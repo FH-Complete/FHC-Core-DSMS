@@ -7,7 +7,7 @@ $this->load->view('templates/header', array('title' => 'Datenexport', 'jqueryCur
 $(document).ready(function()
 {
 	$("#person_autocomplete").autocomplete({
-		source: "SearchPerson",
+		source: "searchPerson",
 		minLength:2,
 		response: function(event, ui)
 		{

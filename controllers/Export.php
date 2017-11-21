@@ -3,6 +3,9 @@ if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Export extends FHC_Controller
 {
+	/**
+	 * Constructor
+	 */
 	public function __construct()
 	{
 		parent::__construct();
@@ -10,6 +13,7 @@ class Export extends FHC_Controller
 
 	/**
 	 * Displays Form for choosing Persons
+	 * @return void
 	 */
 	public function index()
 	{
@@ -18,7 +22,8 @@ class Export extends FHC_Controller
 
 	/**
 	 * Creates the HTML Export of Personal Data
-	 * @param person_id GET Parameter
+	 * Function expects a person_id GET Parameter
+	 * @return void
 	 */
 	public function export()
 	{
@@ -29,14 +34,14 @@ class Export extends FHC_Controller
 
 	/**
 	 * Autocomplete search
-	 * @param term GET Parameter
-	 * @return json Data
+	 * Function expects a term GET Parameter
+	 * @return void
 	 */
-	public function SearchPerson()
+	public function searchPerson()
 	{
 		$filter = mb_strtolower($this->input->get('term'));
 
-		$this->load->model("person/person_model","PersonModel");
+		$this->load->model("person/person_model", "PersonModel");
 		$result = $this->PersonModel->searchPerson($filter);
 		if (isSuccess($result))
 			echo json_encode($result->retval);

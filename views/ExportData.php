@@ -1,5 +1,5 @@
 <?php
-$this->load->view('templates/header', array('title' => 'Datenexport','tablesort' => true));
+$this->load->view('templates/header', array('title' => 'Datenexport', 'tablesort' => true));
 ?>
 <body>
 <h1>Datenexport</h1>
@@ -14,25 +14,28 @@ if (isset($dataset['prestudent']) && is_array($dataset['prestudent']))
 		echo "<h2>Prestudent ".$prestudent_id."</h2>";
 		$this->load->view('extensions/FHC-Core-DSMS/ExportDataObject', array('dataset' => $dataset_prestudent));
 
-		if(isset($dataset['student'][$prestudent_id]))
+		if (isset($dataset['student'][$prestudent_id]))
 		{
 			echo "<h2>Studentendaten</h2>";
-			$this->load->view('extensions/FHC-Core-DSMS/ExportDataObject',
-				array('dataset' => $dataset['student'][$prestudent_id]['result']));
+			$this->load->view(
+				'extensions/FHC-Core-DSMS/ExportDataObject',
+				array('dataset' => $dataset['student'][$prestudent_id]['result'])
+			);
 
 			$uid = $dataset['student'][$prestudent_id]['uid'];
 			echo "<h2>Benutzer ".$uid."</h2>";
 
-			$this->load->view('extensions/FHC-Core-DSMS/ExportDataObject',
-				array('dataset' => $dataset['benutzer'][$uid]));
+			$this->load->view(
+				'extensions/FHC-Core-DSMS/ExportDataObject',
+				array('dataset' => $dataset['benutzer'][$uid])
+			);
 		}
-
 	}
 }
 
-if(isset($dataset['mitarbeiter']))
+if (isset($dataset['mitarbeiter']))
 {
-	foreach($dataset['mitarbeiter'] as $uid => $row_mitarbeiter)
+	foreach ($dataset['mitarbeiter'] as $uid => $row_mitarbeiter)
 	{
 		echo "<h2>Mitarbeiter ".$uid."</h2>";
 		$this->load->view('extensions/FHC-Core-DSMS/ExportDataObject', array('dataset' => $row_mitarbeiter));

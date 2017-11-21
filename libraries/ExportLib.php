@@ -6,6 +6,9 @@ class ExportLib
 {
 	const SQL_EXPORT_DIRECTORY = FHCPATH.'application/extensions/FHC-Core-DSMS/export/sql';
 
+	/**
+	 * Constructor
+	 */
 	public function __construct()
 	{
 		// Gets CI instance
@@ -18,7 +21,8 @@ class ExportLib
 
 	/**
 	 * Read the Personal Data and Export it as HTML
-	 * @param $person_id ID of the Person to export
+	 * @param int $person_id ID of the Person to export.
+	 * @return void
 	 */
 	public function export($person_id)
 	{
@@ -28,7 +32,7 @@ class ExportLib
 		$result_arr = $this->getExportData(ExportLib::SQL_EXPORT_DIRECTORY, array('person_id' => $person_id));
 		$dataset['person'] = $result_arr;
 
-		$benutzer = $this->ci->BenutzerModel->loadWhere('person_id='.$person_id);
+		$benutzer = $this->ci->BenutzerModel->loadWhere('person_id='.$this->ci->db->escape($person_id));
 
 		if (isSuccess($benutzer))
 		{
@@ -39,20 +43,24 @@ class ExportLib
 					// load User Data
 					$result_arr = $this->getExportData(
 						ExportLib::SQL_EXPORT_DIRECTORY.'/Benutzer',
-						array('person_id' => $person_id, 'uid' => $row_benutzer->uid));
+						array('person_id' => $person_id, 'uid' => $row_benutzer->uid)
+					);
 
 					$dataset['benutzer'][$row_benutzer->uid] = $result_arr;
 
 					// load Employee Data
 					$mitarbeiter = $this->ci->MitarbeiterModel->loadWhere(
-							"mitarbeiter_uid=".$this->ci->db->escape($row_benutzer->uid));
+						"mitarbeiter_uid=".$this->ci->db->escape($row_benutzer->uid)
+					);
+
 					if (isSuccess($mitarbeiter))
 					{
 						if (hasData($mitarbeiter))
 						{
 							$result_arr = $this->getExportData(
 								ExportLib::SQL_EXPORT_DIRECTORY.'/Mitarbeiter',
-								array('person_id' => $person_id, 'uid' => $row_benutzer->uid));
+								array('person_id' => $person_id, 'uid' => $row_benutzer->uid)
+							);
 
 							$dataset['mitarbeiter'][$row_benutzer->uid] = $result_arr;
 						}
@@ -64,7 +72,9 @@ class ExportLib
 
 					// load Student Data
 					$student = $this->ci->StudentModel->loadWhere(
-						"student_uid=".$this->ci->db->escape($row_benutzer->uid));
+						"student_uid=".$this->ci->db->escape($row_benutzer->uid)
+					);
+
 					if (isSuccess($student))
 					{
 						if (hasData($student))
@@ -74,7 +84,8 @@ class ExportLib
 								ExportLib::SQL_EXPORT_DIRECTORY.'/Student',
 								array('person_id' => $person_id,
 									'uid' => $row_benutzer->uid,
-									'prestudent_id' => $prestudent_id));
+									'prestudent_id' => $prestudent_id)
+							);
 
 							$dataset['student'][$prestudent_id] = array(
 									'uid' => $row_benutzer->uid,
@@ -99,7 +110,8 @@ class ExportLib
 					$prestudent_id = $row_prestudent->prestudent_id;
 					$result_arr = $this->getExportData(
 						ExportLib::SQL_EXPORT_DIRECTORY.'/Prestudent',
-						array('person_id' => $person_id, 'prestudent_id' => $prestudent_id));
+						array('person_id' => $person_id, 'prestudent_id' => $prestudent_id)
+					);
 					$dataset['prestudent'][$prestudent_id] = $result_arr;
 				}
 			}
@@ -111,7 +123,7 @@ class ExportLib
 				}
 			}
 
-			$this->ci->load->view('extensions/FHC-Core-DSMS/ExportData',array('dataset' => $dataset));
+			$this->ci->load->view('extensions/FHC-Core-DSMS/ExportData', array('dataset' => $dataset));
 		}
 		else
 		{
@@ -124,8 +136,8 @@ class ExportLib
 	 * and execute the SQL and returns the Result
 	 * Reads the Category Name from the SQL Comments
 	 *
-	 * @param $dir Directory of the SQLs
-	 * @param $param List of Variables that are replaces in the SQLS
+	 * @param string $dir Directory of the SQLs.
+	 * @param array $param List of Variables that are replaces in the SQLS.
 	 * @return array with the result objects
 	 */
 	public function getExportData($dir, $param)
@@ -139,7 +151,7 @@ class ExportLib
 				$sql = file_get_contents($file);
 
 				// Substitute parameter
-				foreach ($param as $key=>$value)
+				foreach ($param as $key => $value)
 					$sql = str_replace('$'.$key, $this->ci->db->escape($value), $sql);
 
 				// parse Category
