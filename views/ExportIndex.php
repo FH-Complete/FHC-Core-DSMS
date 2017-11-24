@@ -26,7 +26,7 @@ $(document).ready(function()
 });
 </script>
 
-Auf dieser Seite können sie die Persönlichen Daten einzelner Personen exportieren.<br>
+Auf dieser Seite können sie die persönlichen Daten einzelner Personen exportieren.<br>
 Suchen Sie die zu exportierende Person:<bR>
 <br>
 <form method="GET" action="export">

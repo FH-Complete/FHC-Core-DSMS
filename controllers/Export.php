@@ -9,6 +9,10 @@ class Export extends FHC_Controller
 	public function __construct()
 	{
 		parent::__construct();
+
+		$this->load->library('PermissionLib');
+		if(!$this->permissionlib->isBerechtigt('dsms/export'))
+			show_error('You have no Permission! You need DSMSExport Role');
 	}
 
 	/**

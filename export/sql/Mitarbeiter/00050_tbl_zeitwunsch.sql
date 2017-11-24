@@ -1,9 +1,11 @@
 -- Category: Zeitwunsch
 SELECT
-	gewicht,
+	tag,
 	stunde,
-	tag
+	gewicht
 FROM
 	campus.tbl_zeitwunsch
 WHERE
 	mitarbeiter_uid=$uid
+ORDER BY
+	tag, stunde

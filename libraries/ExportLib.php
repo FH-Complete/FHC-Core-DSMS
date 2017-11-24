@@ -127,8 +127,9 @@ class ExportLib
 		}
 		else
 		{
-			show_error($student->benutzer);
+			show_error($benutzer->retval);
 		}
+
 	}
 
 	/**
