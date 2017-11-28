@@ -44,3 +44,17 @@ WHERE
 	NOT EXISTS(
 		SELECT 1 FROM system.tbl_rolleberechtigung
 		WHERE rolle_kurzbz='DSMSExport' AND berechtigung_kurzbz='basis/benutzer');
+
+INSERT INTO system.tbl_rolleberechtigung(berechtigung_kurzbz, rolle_kurzbz, art)
+SELECT 'basis/akte', 'DSMSExport', 's'
+WHERE
+	NOT EXISTS(
+		SELECT 1 FROM system.tbl_rolleberechtigung
+		WHERE rolle_kurzbz='DSMSExport' AND berechtigung_kurzbz='basis/akte');
+
+INSERT INTO system.tbl_rolleberechtigung(berechtigung_kurzbz, rolle_kurzbz, art)
+SELECT 'fs/dms', 'DSMSExport', 's'
+WHERE
+	NOT EXISTS(
+		SELECT 1 FROM system.tbl_rolleberechtigung
+		WHERE rolle_kurzbz='DSMSExport' AND berechtigung_kurzbz='fs/dms');

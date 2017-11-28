@@ -37,6 +37,18 @@ class Export extends FHC_Controller
 	}
 
 	/**
+	 * Export a PDF with all saved Documents of a Person
+	 * Function expects a person_id GET Parameter
+	 * @return void
+	 */
+	public function exportDocuments()
+	{
+		$person_id = $this->input->get('person_id');
+		$this->load->library('extensions/FHC-Core-DSMS/DocumentExportLib');
+		$this->documentexportlib->exportDocument($person_id);
+	}
+
+	/**
 	 * Autocomplete search
 	 * Function expects a term GET Parameter
 	 * @return void
