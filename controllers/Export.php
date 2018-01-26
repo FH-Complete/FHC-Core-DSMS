@@ -21,6 +21,7 @@ class Export extends FHC_Controller
 	 */
 	public function index()
 	{
+		$this->load->library('WidgetLib');
 		$this->load->view('extensions/FHC-Core-DSMS/ExportIndex');
 	}
 

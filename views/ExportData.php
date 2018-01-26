@@ -1,5 +1,12 @@
 <?php
-$this->load->view('templates/header', array('title' => 'Datenexport', 'tablesort' => true));
+$this->load->view('templates/FHC-Header', array(
+	'title' => 'Datenexport',
+	'jquery' => true,
+	'jqueryui' => true,
+	'tablesorter' => true,
+	'bootstrap' => true,
+	'fontawesome' => true,
+	'sbadmintemplate' => true));
 ?>
 <body>
 <h1>Datenexport</h1>
@@ -42,5 +49,5 @@ if (isset($dataset['mitarbeiter']))
 		$this->load->view('extensions/FHC-Core-DSMS/ExportDataObject', array('dataset' => $dataset['benutzer'][$uid]));
 	}
 }
-$this->load->view('templates/footer');
+$this->load->view('templates/FHC-Footer');
 ?>
