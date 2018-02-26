@@ -43,15 +43,6 @@ $(document).ready(function()
 <div id="wrapper">
 	<?php
 
-	$navigationHeaderArray = array('headertext' => 'FH-Complete -> Datenschutz Management System', 'headertextlink' => base_url('index.ci.php'));
-
-	$navigationMenuArray =
-		array(
-			'Zurueck' => array('link' => site_url(), 'description' => 'Zurück', 'icon' => 'backward'),
-			'Export' => array('link' => '#', 'icon' => 'vcard', 'description' => 'Export', 'expand' => true, 'children' => array()
-		)
-	);
-
 	echo $this->widgetlib->widget(
 	'NavigationWidget',
 		array(

@@ -21,8 +21,22 @@ class Export extends FHC_Controller
 	 */
 	public function index()
 	{
+		$navigationHeaderArray = array(
+			'headertext' => 'FH-Complete -> Datenschutz Management System',
+			'headertextlink' => base_url('index.ci.php')
+		);
+
+		$navigationMenuArray = array(
+				'Zurueck' => array('link' => site_url(), 'description' => 'Zurück', 'icon' => 'backward'),
+				'Export' => array('link' => '#', 'description' => 'Export', 'icon' => 'vcard', 'children' => array())
+		);
 		$this->load->library('WidgetLib');
-		$this->load->view('extensions/FHC-Core-DSMS/ExportIndex');
+		$this->load->view('extensions/FHC-Core-DSMS/ExportIndex',
+			array(
+				'navigationHeaderArray' => $navigationHeaderArray,
+				'navigationMenuArray' => $navigationMenuArray
+			)
+		);
 	}
 
 	/**

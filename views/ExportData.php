@@ -49,5 +49,16 @@ if (isset($dataset['mitarbeiter']))
 		$this->load->view('extensions/FHC-Core-DSMS/ExportDataObject', array('dataset' => $dataset['benutzer'][$uid]));
 	}
 }
+echo '
+<script language="Javascript" type="text/javascript">
+		$(document).ready(function()
+		{
+			$(".tablesorter").tablesorter(
+			{
+				sortList: [[0,1]],
+				widgets: ["zebra"]
+			});
+		});
+	</script>';
 $this->load->view('templates/FHC-Footer');
 ?>
