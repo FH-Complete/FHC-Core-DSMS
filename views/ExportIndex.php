@@ -42,15 +42,7 @@ $(document).ready(function()
 </script>
 <div id="wrapper">
 	<?php
-
-	echo $this->widgetlib->widget(
-	'NavigationWidget',
-		array(
-			'navigationHeader' => $navigationHeaderArray,
-			'navigationMenu' => $navigationMenuArray
-		)
-	);
-
+	echo $this->widgetlib->widget('NavigationWidget');
 	?>
 	<div id="page-wrapper">
 		<div class="container-fluid">
