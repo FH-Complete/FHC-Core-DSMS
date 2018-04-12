@@ -67,9 +67,53 @@ class Export extends FHC_Controller
 			echo json_encode(null);
 	}
 
+	/**
+	 * Displays an Overview over the Exisiting Anonymization Tasks
+	 */
 	public function Anonymisierung()
 	{
+		$this->load->model("extensions/FHC-Core-DSMS/Anonymisierung_model", "AnonymisierungModel");
 		$this->load->library('WidgetLib');
-		$this->load->view('extensions/FHC-Core-DSMS/Anonymisierung');
+
+		$result = $this->AnonymisierungModel->getActiveRecords();
+
+		if(hasData($result))
+		{
+			$jobs = $result->retval;
+		}
+		else
+		{
+			$jobs = array();
+			var_dump($result);
+		}
+
+		$this->load->view('extensions/FHC-Core-DSMS/Anonymisierung', array('jobs'=>$jobs));
+	}
+
+	/**
+	 * Displays the Details of a Anonymization Task
+	 * @param $anonymisierung_kurzbz Shortname of the Task
+	 */
+	public function Details($anonymisierung_kurzbz)
+	{
+		$this->load->model("extensions/FHC-Core-DSMS/Anonymisierung_model", "AnonymisierungModel");
+		$this->load->library('WidgetLib');
+
+		$result = $this->AnonymisierungModel->load($anonymisierung_kurzbz);
+		if(hasData($result))
+		{
+			$data = $result->retval[0];
+		}
+		else
+		{
+			show_error('No Entry found');
+		}
+		$anzahl = $this->AnonymisierungModel->getCount($anonymisierung_kurzbz);
+
+		$params['anonymisierung_kurzbz'] = $anonymisierung_kurzbz;
+		$params['data'] = $data;
+		$params['anzahl'] = $anzahl;
+
+		$this->load->view('extensions/FHC-Core-DSMS/AnonymisierungDetails', $params);
 	}
 }
