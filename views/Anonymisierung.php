@@ -57,13 +57,6 @@ $this->load->view('templates/FHC-Header', array(
 	</div>
 </div>
 
-<script>
-	//javascript hacks for bootstrap
-	$("select").addClass("form-control");
-	$("input[type=text]").addClass("form-control");
-	$("input[type=button]").addClass("btn btn-default");
-	$("#tableDataset").addClass('table-bordered');
-</script>
 </body>
 <?php
 $this->load->view('templates/FHC-Footer');

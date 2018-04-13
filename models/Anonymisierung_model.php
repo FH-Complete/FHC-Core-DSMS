@@ -68,9 +68,19 @@ class Anonymisierung_model extends DB_Model
 
 		if(hasData($result))
 		{
+			// Anonymize Data
 			$result = $this->execQuery($result->retval[0]->anonymisierung_sql);
 			if(isSuccess($result))
-				return true;
+			{
+				// Write last execution Date
+				$resultupdate = $this->update($anonymisierung_kurzbz, array('last_execute'=>date('Y-m-d H:i:s')));
+				if(isSuccess($resultupdate))
+				{
+					return true;
+				}
+				else
+					show_error($resultupdate->retval);
+			}
 			else
 				return false;
 		}

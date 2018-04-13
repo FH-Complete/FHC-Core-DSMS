@@ -116,4 +116,15 @@ class Export extends FHC_Controller
 
 		$this->load->view('extensions/FHC-Core-DSMS/AnonymisierungDetails', $params);
 	}
+
+	public function Anonymize()
+	{
+		$anonymisierung_kurzbz = $this->input->post('anonymisierung_kurzbz');
+		if($anonymisierung_kurzbz=='')
+			show_error('Parameter Missing');
+
+		$this->load->model("extensions/FHC-Core-DSMS/Anonymisierung_model", "AnonymisierungModel");
+		$this->AnonymisierungModel->runAnonymization($anonymisierung_kurzbz);
+		redirect("/extensions/FHC-Core-DSMS/Export/Details/".$anonymisierung_kurzbz);
+	}
 }

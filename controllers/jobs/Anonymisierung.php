@@ -49,7 +49,7 @@ class Anonymisierung extends FHC_Controller
 	public function runAll()
 	{
 		$this->load->model("extensions/FHC-Core-DSMS/Anonymisierung_model", "AnonymisierungModel");
-
+		
 		$result = $this->AnonymisierungModel->getActiveRecords();
 
 		if(hasData($result))

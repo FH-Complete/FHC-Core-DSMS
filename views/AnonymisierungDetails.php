@@ -6,10 +6,13 @@ $this->load->view('templates/FHC-Header', array(
 	'bootstrap' => true,
 	'fontawesome' => true,
 	'sbadmintemplate' => true));
+
+$this->load->helper('date');
 ?>
 <body>
 <div id="wrapper">
 	<?php
+
 	echo $this->widgetlib->widget('NavigationWidget');
 	?>
 	<div id="page-wrapper">
@@ -23,19 +26,17 @@ $this->load->view('templates/FHC-Header', array(
 			<div>
 				<?php echo $data->beschreibung; ?>
 			</div>
-			<br>Letzte Anonymisierung: <?php echo $data->last_execute;?>
+			<br>Letzte Anonymisierung: <?php echo nice_date($data->last_execute,'d.m.Y H:i');?>
 			<br>zu Anonymisierende Datensätze: <?php echo $anzahl;?>
+			<br>
+			<br>
+			<form method="POST" action="<?php echo site_url('extensions/FHC-Core-DSMS/Export/Anonymize');?>">
+				<input type="hidden" name="anonymisierung_kurzbz" value="<?php echo $anonymisierung_kurzbz; ?>" />
+				<input type="submit" value="Anonymisierung starten" class="btn btn-default">
+			</form>
 		</div>
 	</div>
 </div>
-
-<script>
-	//javascript hacks for bootstrap
-	$("select").addClass("form-control");
-	$("input[type=text]").addClass("form-control");
-	$("input[type=button]").addClass("btn btn-default");
-	$("#tableDataset").addClass('table-bordered');
-</script>
 </body>
 <?php
 $this->load->view('templates/FHC-Footer');
