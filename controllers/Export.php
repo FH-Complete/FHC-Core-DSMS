@@ -84,7 +84,6 @@ class Export extends FHC_Controller
 		else
 		{
 			$jobs = array();
-			var_dump($result);
 		}
 
 		$this->load->view('extensions/FHC-Core-DSMS/Anonymisierung', array('jobs'=>$jobs));
