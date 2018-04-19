@@ -4,7 +4,7 @@ if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 class ExportLib
 {
-	const SQL_EXPORT_DIRECTORY = FHCPATH.'application/extensions/FHC-Core-DSMS/export/sql';
+	private $SQL_EXPORT_DIRECTORY;
 
 	/**
 	 * Constructor
@@ -17,6 +17,7 @@ class ExportLib
 		$this->ci->load->model("crm/Student_model", "StudentModel");
 		$this->ci->load->model("crm/Prestudent_model", "PrestudentModel");
 		$this->ci->load->model("ressource/Mitarbeiter_model", "MitarbeiterModel");
+		$this->SQL_EXPORT_DIRECTORY = FHCPATH.'application/extensions/FHC-Core-DSMS/export/sql';
 	}
 
 	/**
@@ -29,7 +30,7 @@ class ExportLib
 		$dataset = array();
 
 		// Load Person Data
-		$result_arr = $this->getExportData(ExportLib::SQL_EXPORT_DIRECTORY, array('person_id' => $person_id));
+		$result_arr = $this->getExportData($this->SQL_EXPORT_DIRECTORY, array('person_id' => $person_id));
 		$dataset['person'] = $result_arr;
 
 		$benutzer = $this->ci->BenutzerModel->loadWhere('person_id='.$this->ci->db->escape($person_id));
@@ -42,7 +43,7 @@ class ExportLib
 				{
 					// load User Data
 					$result_arr = $this->getExportData(
-						ExportLib::SQL_EXPORT_DIRECTORY.'/Benutzer',
+						$this->SQL_EXPORT_DIRECTORY.'/Benutzer',
 						array('person_id' => $person_id, 'uid' => $row_benutzer->uid)
 					);
 
@@ -58,7 +59,7 @@ class ExportLib
 						if (hasData($mitarbeiter))
 						{
 							$result_arr = $this->getExportData(
-								ExportLib::SQL_EXPORT_DIRECTORY.'/Mitarbeiter',
+								$this->SQL_EXPORT_DIRECTORY.'/Mitarbeiter',
 								array('person_id' => $person_id, 'uid' => $row_benutzer->uid)
 							);
 
@@ -81,7 +82,7 @@ class ExportLib
 						{
 							$prestudent_id = $student->retval[0]->prestudent_id;
 							$result_arr = $this->getExportData(
-								ExportLib::SQL_EXPORT_DIRECTORY.'/Student',
+								$this->SQL_EXPORT_DIRECTORY.'/Student',
 								array('person_id' => $person_id,
 									'uid' => $row_benutzer->uid,
 									'prestudent_id' => $prestudent_id)
@@ -109,7 +110,7 @@ class ExportLib
 				{
 					$prestudent_id = $row_prestudent->prestudent_id;
 					$result_arr = $this->getExportData(
-						ExportLib::SQL_EXPORT_DIRECTORY.'/Prestudent',
+						$this->SQL_EXPORT_DIRECTORY.'/Prestudent',
 						array('person_id' => $person_id, 'prestudent_id' => $prestudent_id)
 					);
 					$dataset['prestudent'][$prestudent_id] = $result_arr;
