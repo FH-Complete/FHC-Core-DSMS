@@ -13,6 +13,8 @@ CREATE OR REPLACE FUNCTION extension_dsms_create_table () RETURNS TEXT AS $$
 
 	ALTER TABLE extension.tbl_dsms_anonymisierung ADD CONSTRAINT pk_tbl_dsms_anonymisierung PRIMARY KEY (anonymisierung_kurzbz);
 
+	GRANT SELECT, INSERT, UPDATE, DELETE ON extension.tbl_dsms_anonymisierung TO vilesci;
+
 	SELECT 'Table added'::text;
  $$
 LANGUAGE 'sql';
