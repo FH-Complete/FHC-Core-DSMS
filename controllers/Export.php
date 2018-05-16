@@ -41,13 +41,38 @@ class Export extends FHC_Controller
 	/**
 	 * Export a PDF with all saved Documents of a Person
 	 * Function expects a person_id GET Parameter
+	 * if the GET Parameter force is set, the document is created even if there are some
+	 * documents that cannot be convertet to pdf
 	 * @return void
 	 */
 	public function exportDocuments()
 	{
 		$person_id = $this->input->get('person_id');
+		$force = $this->input->get('force');
 		$this->load->library('extensions/FHC-Core-DSMS/DocumentExportLib');
-		$this->documentexportlib->exportDocument($person_id);
+		if($force != '')
+		{
+			$ret = $this->documentexportlib->exportDocument($person_id);
+		}
+		else
+		{
+			// Try to generate the Document
+			$ret = $this->documentexportlib->exportDocument($person_id, true);
+			if(isSuccess($ret))
+			{
+				$this->documentexportlib->exportDocument($person_id);
+			}
+			else
+			{
+				// If there are some documents that cannot be converted to PDF
+				// show a list of the problematic Documents and a button to force the download
+				$this->load->library('WidgetLib');
+				$this->load->view('extensions/FHC-Core-DSMS/ExportDocuments', array(
+					'person_id'=>$person_id,
+					'convertfailed'=>$ret->retval
+				));
+			}
+		}
 	}
 
 	/**

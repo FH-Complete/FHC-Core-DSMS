@@ -20,9 +20,10 @@ class DocumentExportLib
 	/**
 	 * Export the Documents of a Person
 	 * @param int $person_id ID of the Person to export.
+	 * @param boolean $dryrun when true only tries to convert the files without sending the file
 	 * @return void
 	 */
-	public function exportDocument($person_id)
+	public function exportDocument($person_id, $dryrun = false)
 	{
 		$akten = $this->ci->AkteModel->loadWhere('person_id='.$this->ci->db->escape($person_id));
 
@@ -32,6 +33,7 @@ class DocumentExportLib
 			show_error('Failed to Create Tempdir');
 		$file_arr = array();
 		$filestoclean = array();
+		$files_skipped = array();
 
 		if (hasData($akten))
 		{
@@ -64,28 +66,44 @@ class DocumentExportLib
 				}
 				else
 				{
-					show_error($outFile->retval);
+					$filestoclean[] = $filename;
+					$files_skipped[] = array(
+						'akte_id' => $akte->akte_id,
+						'dokumenttyp_kurzbz' => $akte->dokument_kurzbz,
+						'bezeichnung' => $akte->bezeichnung,
+						'mimetype' => $akte->mimetype
+					);
 				}
 			}
 
-			$finaldocument = $tempdir.'/out.pdf';
-			// Merge all Documents
-			$ret = $this->ci->documentlib->mergePDF($file_arr, $finaldocument);
-			if (isSuccess($ret))
+			if(!$dryrun)
 			{
-				$filestoclean[] = 'out.pdf';
+				$finaldocument = $tempdir.'/out.pdf';
+				// Merge all Documents
+				$ret = $this->ci->documentlib->mergePDF($file_arr, $finaldocument);
+				if (isSuccess($ret))
+				{
+					$filestoclean[] = 'out.pdf';
 
-				$fsize = filesize($finaldocument);
-				header('Content-type: application/pdf');
-				header('Content-Disposition: attachment; filename="Dokumentenakt.pdf"');
-				header('Content-Length: '.$fsize);
+					$fsize = filesize($finaldocument);
+					header('Content-type: application/pdf');
+					header('Content-Disposition: attachment; filename="Dokumentenakt.pdf"');
+					header('Content-Length: '.$fsize);
 
-				// Output final Document
-				echo file_get_contents($finaldocument);
+					// Output final Document
+					echo file_get_contents($finaldocument);
+				}
+				else
+				{
+					show_error($ret->retval);
+				}
 			}
 			else
 			{
-				show_error($ret->retval);
+				if (count($files_skipped) > 0)
+					return error($files_skipped);
+				else
+					return success(true);
 			}
 		}
 		elseif (!isSuccess($akten))
