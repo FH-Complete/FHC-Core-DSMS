@@ -5,6 +5,8 @@ $this->load->view('templates/FHC-Header', array(
 	'jqueryui' => true,
 	'bootstrap' => true,
 	'fontawesome' => true,
+	'ajaxlib' => true,
+	'navigationwidget' => true,
 	'sbadmintemplate' => true));
 
 $this->load->helper('date');

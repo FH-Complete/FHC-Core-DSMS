@@ -6,6 +6,8 @@ $this->load->view('templates/FHC-Header', array(
 	'tablesorter' => true,
 	'bootstrap' => true,
 	'fontawesome' => true,
+	'ajaxlib' => true,
+	'navigationwidget' => true,
 	'sbadmintemplate' => true));
 ?>
 <body>
