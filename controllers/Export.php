@@ -1,19 +1,23 @@
 <?php
 if (! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Export extends FHC_Controller
+class Export extends Auth_Controller
 {
 	/**
 	 * Constructor
 	 */
 	public function __construct()
 	{
-		parent::__construct();
-
-		$this->load->library('PermissionLib');
-		if(!$this->permissionlib->isBerechtigt('dsms/export'))
-			show_error('You have no Permission! You need DSMSExport Role');
-
+		parent::__construct(array(
+			'index'=>'dsms/export:rw',
+			'export'=>'dsms/export:r',
+			'exportDocuments'=>'dsms/export:r',
+			'searchPerson'=>'dsms/export:r',
+			'Anonymisierung'=>'dsms/export:r',
+			'Details'=>'dsms/export:r',
+			'Anonymize'=>'dsms/export:rw'
+			)
+		);
 	}
 
 	/**
