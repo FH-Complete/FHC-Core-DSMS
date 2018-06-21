@@ -1,7 +1,7 @@
 <?php
 
 // Add Menu-Entry to Main Page
-$config['navigation_menu']['Vilesci/index']['Administration']['children']['Datenschutz'] = array(
+$config['navigation_menu']['Vilesci/index']['administration']['children']['datenschutz'] = array(
 			'link' => site_url('extensions/FHC-Core-DSMS/Export'),
 			'description' => 'Datenschutz',
 			'icon' => 'legal',
@@ -10,12 +10,12 @@ $config['navigation_menu']['Vilesci/index']['Administration']['children']['Daten
 
 // Add Menu-Entry to Extension Page
 $config['navigation_menu']['extensions/FHC-Core-DSMS/*'] = array(
-	'Export' => array(
+	'export' => array(
 		'link' => site_url('extensions/FHC-Core-DSMS/Export/'),
 		'description' => 'Export',
 		'icon' => 'vcard'
 	),
-	'Anonymisierung' => array(
+	'anonymisierung' => array(
 		'link' => site_url('extensions/FHC-Core-DSMS/Export/Anonymisierung'),
 		'description' => 'Anonymisierung',
 		'icon' => 'user-secret'
