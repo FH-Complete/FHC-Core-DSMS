@@ -5,7 +5,8 @@ $config['navigation_menu']['Vilesci/index']['administration']['children']['daten
 			'link' => site_url('extensions/FHC-Core-DSMS/Export'),
 			'description' => 'Datenschutz',
 			'icon' => 'legal',
-			'expand' => true
+			'expand' => true,
+			'requiredPermissions' => 'dsms/export:r'
 );
 
 // Add Menu-Entry to Extension Page
