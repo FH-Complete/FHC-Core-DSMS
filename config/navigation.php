@@ -1,10 +1,9 @@
 <?php
 
 // Add Menu-Entry to Main Page
-$config['navigation_menu']['Vilesci/index']['administration']['children']['datenschutz'] = array(
+$config['navigation_header']['*']['Personen']['children']['datenschutz'] = array(
 			'link' => site_url('extensions/FHC-Core-DSMS/Export'),
 			'description' => 'Datenschutz',
-			'icon' => 'legal',
 			'expand' => true,
 			'requiredPermissions' => 'dsms/export:r'
 );
