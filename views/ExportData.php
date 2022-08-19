@@ -1,14 +1,14 @@
 <?php
 $this->load->view('templates/FHC-Header', array(
 	'title' => 'Datenexport',
-	'jquery' => true,
-	'jqueryui' => true,
-	'tablesorter' => true,
-	'bootstrap' => true,
-	'fontawesome' => true,
+	'jquery3' => true,
+	'jqueryui1' => true,
+	'tablesorter2' => true,
+	'bootstrap3' => true,
+	'fontawesome4' => true,
 	'ajaxlib' => true,
 	'navigationwidget' => true,
-	'sbadmintemplate' => true));
+	'sbadmintemplate3' => true));
 ?>
 <body>
 <h1>Datenexport</h1>
