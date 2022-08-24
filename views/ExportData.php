@@ -8,7 +8,12 @@ $this->load->view('templates/FHC-Header', array(
 	'fontawesome4' => true,
 	'ajaxlib' => true,
 	'navigationwidget' => true,
-	'sbadmintemplate3' => true));
+	'sbadmintemplate3' => true,
+	'customJSs' => array(
+			'public/extensions/FHC-Core-DSMS/js/Exportdata.js'
+			),
+	)
+);
 ?>
 <body>
 <h1>Datenexport</h1>
@@ -51,16 +56,6 @@ if (isset($dataset['mitarbeiter']))
 		$this->load->view('extensions/FHC-Core-DSMS/ExportDataObject', array('dataset' => $dataset['benutzer'][$uid]));
 	}
 }
-echo '
-<script language="Javascript" type="text/javascript">
-		$(document).ready(function()
-		{
-			$(".tablesorter").tablesorter(
-			{
-				sortList: [[0,1]],
-				widgets: ["zebra"]
-			});
-		});
-	</script>';
+
 $this->load->view('templates/FHC-Footer');
 ?>

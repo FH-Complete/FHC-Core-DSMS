@@ -11,10 +11,10 @@ class DocumentExportLib
 	{
 		// Gets CI instance
 		$this->ci =& get_instance();
-		$this->ci->load->library('FilesystemLib');
 		$this->ci->load->library('DocumentLib');
 		$this->ci->load->library('DmsLib');
 		$this->ci->load->model("crm/Akte_model", "AkteModel");
+		$this->ci->load->model("content/TempFS_model", "TempFSModel");
 	}
 
 	/**
@@ -28,7 +28,10 @@ class DocumentExportLib
 		$akten = $this->ci->AkteModel->loadWhere('person_id='.$this->ci->db->escape($person_id));
 
 		// create Temporary Folder
-		$tempdir = sys_get_temp_dir().'/FHC_'.uniqid();
+		$tempdir = sys_get_temp_dir();
+		$directory = 'FHC_'.uniqid();
+		$tempdir .= '/'.$directory;
+
 		if (!mkdir($tempdir))
 			show_error('Failed to Create Tempdir');
 		$file_arr = array();
@@ -44,7 +47,17 @@ class DocumentExportLib
 
 				if (isSuccess($content))
 				{
-					if ($this->ci->filesystemlib->write($tempdir, $filename, $content->retval) === true)
+					$openWriteResult = $this->ci->TempFSModel->openReadWrite($directory.'/'.$filename);
+					if (isError($openWriteResult))
+					{
+						show_error('Cannot open Temp File in Write Mode');
+					}
+
+					$fileHandle = getData($openWriteResult);
+
+					$writeResult = $this->ci->TempFSModel->write($fileHandle, $content->retval);
+
+					if (!isError($writeResult))
 					{
 						$filestoclean[] = $filename;
 					}
