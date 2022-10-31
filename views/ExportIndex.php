@@ -1,46 +1,20 @@
 <?php
 $this->load->view('templates/FHC-Header', array(
 	'title' => 'Datenexport',
-	'jquery' => true,
-	'jqueryui' => true,
-	'bootstrap' => true,
-	'fontawesome' => true,
+	'jquery3' => true,
+	'jqueryui1' => true,
+	'bootstrap3' => true,
+	'fontawesome4' => true,
 	'ajaxlib' => true,
 	'navigationwidget' => true,
-	'sbadmintemplate' => true));
+	'sbadmintemplate3' => true,
+	'customJSs' => array(
+			'public/extensions/FHC-Core-DSMS/js/Export.js'
+			),
+	)
+);
 ?>
 <body>
-<script>
-$(document).ready(function()
-{
-	$("#export_submit").prop("disabled",true);
-	$("#document_submit").prop("disabled",true);
-	$("#exportform").hide();
-
-	$("#person_autocomplete").autocomplete({
-		source: "<?php echo site_url('extensions/FHC-Core-DSMS/export/searchPerson') ?>",
-		minLength:2,
-		response: function(event, ui)
-		{
-			//Value und Label fuer die Anzeige setzen
-			for(i in ui.content)
-			{
-				ui.content[i].value = ui.content[i].vorname+' '+ui.content[i].nachname+'('+ui.content[i].person_id+')';
-				ui.content[i].label = ui.content[i].vorname+' '+ui.content[i].nachname+'('+ui.content[i].person_id+')';
-			}
-		},
-		select: function(event, ui)
-		{
-			$("#person_id_export").val(ui.item.person_id);
-			$("#person_id_documents").val(ui.item.person_id);
-			$("#export_submit").prop("disabled",false);
-			$("#document_submit").prop("disabled",false);
-			$("#nametag").html(ui.item.vorname+' '+ui.item.nachname);
-			$("#exportform").show();
-		}
-	});
-});
-</script>
 <div id="wrapper">
 	<?php
 	echo $this->widgetlib->widget('NavigationWidget');
