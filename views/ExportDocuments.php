@@ -1,5 +1,5 @@
 <?php
-$this->load->view('templates/FHC-Header', array(
+$includesArray = array(
 	'title' => 'Datenexport',
 	'jquery3' => true,
 	'jqueryui1' => true,
@@ -7,13 +7,13 @@ $this->load->view('templates/FHC-Header', array(
 	'fontawesome4' => true,
 	'ajaxlib' => true,
 	'navigationwidget' => true,
-	'sbadmintemplate3' => true));
+	'sbadmintemplate3' => true);
+
+$this->load->view('templates/FHC-Header', $includesArray);
 ?>
 <body>
 <div id="wrapper">
-	<?php
-	echo $this->widgetlib->widget('NavigationWidget');
-	?>
+	<?php echo $this->widgetlib->widget('NavigationWidget'); ?>
 	<div id="page-wrapper">
 		<div class="container-fluid">
 			<div class="row">
@@ -45,5 +45,5 @@ $this->load->view('templates/FHC-Header', array(
 
 </body>
 <?php
-$this->load->view('templates/FHC-Footer');
+$this->load->view('templates/FHC-Footer', $includesArray);
 ?>

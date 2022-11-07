@@ -1,5 +1,5 @@
 <?php
-$this->load->view('templates/FHC-Header', array(
+$includesArray = array(
 	'title' => 'Datenexport',
 	'jquery3' => true,
 	'jqueryui1' => true,
@@ -12,8 +12,9 @@ $this->load->view('templates/FHC-Header', array(
 	'customJSs' => array(
 			'public/extensions/FHC-Core-DSMS/js/Exportdata.js'
 			),
-	)
-);
+	);
+
+$this->load->view('templates/FHC-Header', $includesArray);
 ?>
 <body>
 <h1>Datenexport</h1>
@@ -57,5 +58,5 @@ if (isset($dataset['mitarbeiter']))
 	}
 }
 
-$this->load->view('templates/FHC-Footer');
+$this->load->view('templates/FHC-Footer', $includesArray);
 ?>
