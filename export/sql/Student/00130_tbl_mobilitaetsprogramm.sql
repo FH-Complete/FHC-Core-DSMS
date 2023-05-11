@@ -10,4 +10,4 @@ SELECT
 FROM
 	bis.tbl_bisio
 WHERE
-	student_uid=$uid
+	prestudent_id=$prestudent_id
