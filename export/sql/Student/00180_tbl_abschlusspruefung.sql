@@ -11,4 +11,4 @@ SELECT
 FROM
 	lehre.tbl_abschlusspruefung
 WHERE
-	student_uid=$uid
+	prestudent_id=$prestudent_id
