@@ -5,7 +5,7 @@ foreach ($dataset as $element)
 	{
 		$result = $element['result'];
 
-		$cnt = count($result->result_array());
+		$cnt = numberOfElements($result->result_array());
 		if ($cnt > 0)
 		{
 			if ($cnt > 3)

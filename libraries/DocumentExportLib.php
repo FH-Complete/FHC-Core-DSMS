@@ -113,7 +113,7 @@ class DocumentExportLib
 			}
 			else
 			{
-				if (count($files_skipped) > 0)
+				if (numberOfElements($files_skipped) > 0)
 					return error($files_skipped);
 				else
 					return success(true);
